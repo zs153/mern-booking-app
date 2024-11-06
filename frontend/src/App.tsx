@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import { useAppContext } from "./contexts/AppContext";
 import SignIn from "./pages/SignIn";
 import Booking from "./pages/Booking";
+import AddHotel from "./pages/AddHotel";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -56,6 +57,14 @@ const App = () => {
               element={
                 <Layout>
                   <Booking />
+                </Layout>
+              }
+            />
+            <Route
+              path="/add-hotel"
+              element={
+                <Layout>
+                  <AddHotel />
                 </Layout>
               }
             />
