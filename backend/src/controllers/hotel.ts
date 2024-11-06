@@ -7,9 +7,9 @@ export const create = async (req: Request, res: Response): Promise<any> => {
     const imageFiles = req.files as Express.Multer.File[];
     const newHotel: HotelType = req.body;
 
-    //const imageUrls = await uploadImages(imageFiles);
+    const imageUrls = await uploadImages(imageFiles);
 
-    //newHotel.imageUrls = imageUrls;
+    newHotel.imageUrls = imageUrls;
     newHotel.lastUpdate = new Date();
     newHotel.userId = req.userId;
 
@@ -33,9 +33,4 @@ async function uploadImages(imageFiles: Express.Multer.File[]) {
 
   const imageUrls = await Promise.all(uploadPromises);
   return imageUrls;
-}
-
-export const create1 = async (req:Request, res:Response) => {
-  console.log(req.files);
-  return
 }

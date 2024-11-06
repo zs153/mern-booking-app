@@ -14,10 +14,10 @@ export type HotelFormData = {
   pricePerNight: number;
   starRating: number;
   facilities: string[];
-  imageFiles: FileList;
   imageUrls: string[];
   adultCount: number;
   childCount: number;
+  imageFiles: FileList;
 };
 type Props = {
   onSave: (hotelFormData: FormData) => void;

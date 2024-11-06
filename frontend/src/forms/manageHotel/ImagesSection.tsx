@@ -4,9 +4,9 @@ import { HotelFormData } from "./ManageHotelForm";
 const ImagesSection = () => {
   const {
     register,
-    formState: { errors },
     watch,
     setValue,
+    formState: { errors },
   } = useFormContext<HotelFormData>();
 
   const existingImageUrls = watch("imageUrls");

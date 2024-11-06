@@ -1,5 +1,5 @@
-import express from "express";
-import { create, create1 } from "../controllers/hotel";
+import express, {NextFunction, Request, Response} from "express";
+import { create } from "../controllers/hotel";
 import multer from "multer";
 import verifyToken from "../../middleware/auth";
 import { body } from "express-validator";
@@ -32,8 +32,8 @@ router.post(
       .isArray()
       .withMessage("Facilities are required"),
   ],
-  upload.array("imageFiles", 6),
-  create1
+  upload.any(),
+  create
 );
 
 export default router;
