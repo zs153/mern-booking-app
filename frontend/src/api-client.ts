@@ -77,6 +77,18 @@ export const useGetHotels = async (): Promise<HotelType[]> => {
   return response.json();
 };
 
+export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Hotel not found");
+  }
+
+  return response.json();
+};
+
 export const useAddHotel = async (hotelFormData: FormData) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
     method: "POST",
@@ -86,6 +98,19 @@ export const useAddHotel = async (hotelFormData: FormData) => {
 
   if (!response.ok) {
     throw new Error("Failed to add hotel");
+  }
+
+  return response.json();
+};
+
+export const useUpdateHotel = async (hotelFormData: FormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
+    { method: "PUT", credentials: "include", body: hotelFormData }
+  );
+
+  if (!response) {
+    throw new Error("Failed to update hotel");
   }
 
   return response.json();
