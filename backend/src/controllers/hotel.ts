@@ -11,7 +11,21 @@ export const getHotels = async (req: Request, res: Response) => {
     res.status(500).send({ message: error.message });
   }
 };
+export const getHotel = async (req: Request, res: Response) => {
+  const { id } = req.params;
 
+  try {
+    const hotel = await Hotel.find({ _id: id, userId: req.userId });
+
+    if (!hotel) {
+      throw new Error("Hotel not found");
+    }
+
+    res.status(201).send(hotel);
+  } catch (error: any) {
+    res.status(500).send({ message: error.message });
+  }
+};
 export const create = async (req: Request, res: Response) => {
   try {
     const imageFiles = req.files as Express.Multer.File[];
@@ -29,6 +43,40 @@ export const create = async (req: Request, res: Response) => {
     res.status(201).send(hotel);
   } catch (error) {
     console.log("Error creating hotel:", error);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+};
+export const update = async (req: Request, res: Response) => {
+  try {
+    const updatedHotel = req.body;
+
+    updatedHotel.lastUpdated = new Date();
+
+    const hotel = await Hotel.findOneAndUpdate(
+      {
+        _id: req.params.hotelId,
+        userId: req.userId,
+      },
+      updatedHotel,
+      { new: true }
+    );
+
+    if (!hotel) {
+      res.status(404).json({ message: "Hotel not found" });
+    } else {
+      const files = req.files as Express.Multer.File[];
+      const updatedImageUrls = await uploadImages(files);
+
+      hotel.imageUrls = [
+        ...updatedImageUrls,
+        ...(updatedHotel.imageUrls || []),
+      ];
+
+      await hotel.save();
+      res.status(201).send(hotel);
+    }
+  } catch (error) {
+    console.log("Error updating hotel:", error);
     res.status(500).send({ message: "Something went wrong" });
   }
 };
