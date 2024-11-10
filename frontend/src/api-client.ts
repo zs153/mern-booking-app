@@ -79,6 +79,7 @@ export const useGetHotels = async (): Promise<HotelType[]> => {
 
 export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+    method: "GET",
     credentials: "include",
   });
 
@@ -86,7 +87,7 @@ export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
     throw new Error("Hotel not found");
   }
 
-  return response.json();
+  return await response.json();
 };
 
 export const useAddHotel = async (hotelFormData: FormData) => {

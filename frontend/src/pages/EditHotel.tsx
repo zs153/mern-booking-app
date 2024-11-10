@@ -12,18 +12,11 @@ const EditHotel = () => {
     queryKey: ["fetchHotelById", hotelId],
     queryFn: async () => {
       const data = await fetchHotelById(hotelId || "");
+
       return data;
     },
     enabled: !!hotelId,
   });
-
-  // const { data: hotel } = useQuery(
-  //   "fetchHotelById",
-  //   async () => await fetchHotelById(hotelId || ""),
-  //   {
-  //     enabled: !!hotelId,
-  //   }
-  // );
 
   const { mutate, isLoading } = useMutation(useUpdateHotel, {
     onSuccess: () => {

@@ -1,10 +1,10 @@
-import Hero from "@/components/Hero";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
 
-type Props = {
+interface Props {
   children: React.ReactNode;
-};
+}
 
 const Layout = ({ children }: Props) => {
   return (

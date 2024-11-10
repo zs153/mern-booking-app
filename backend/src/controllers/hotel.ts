@@ -15,13 +15,13 @@ export const getHotel = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const hotel = await Hotel.find({ _id: id, userId: req.userId });
+    const hotel = await Hotel.findOne({ _id: id, userId: req.userId });
 
     if (!hotel) {
       throw new Error("Hotel not found");
     }
 
-    res.status(201).send(hotel);
+    res.status(201).json(hotel);
   } catch (error: any) {
     res.status(500).send({ message: error.message });
   }
