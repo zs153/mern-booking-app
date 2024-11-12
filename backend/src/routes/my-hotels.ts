@@ -1,5 +1,5 @@
 import express from "express";
-import { create, getHotel, getHotels, update } from "../controllers/hotel";
+import { create, getHotel, getHotels, update } from "../controllers/my-hotels";
 import multer from "multer";
 import verifyToken from "../../middleware/auth";
 import { body } from "express-validator";
