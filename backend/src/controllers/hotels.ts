@@ -60,11 +60,12 @@ export const getHotels = async (req: Request, res: Response) => {
   }
 };
 
-export const getHotelDeMierda = async (req: Request, res: Response) => {
+export const getHotel = async (req: Request, res: Response) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    res.status(400).json({ errors: errors.array() });
+    return;
   }
 
   const id = req.params.id.toString();
@@ -73,7 +74,7 @@ export const getHotelDeMierda = async (req: Request, res: Response) => {
     const hotel = await Hotel.findById(id);
 
     if (!hotel) {
-      return res.status(400).json("Hotel not found");
+      throw new Error("Hotel not found");
     }
 
     res.status(201).json(hotel);

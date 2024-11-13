@@ -1,4 +1,4 @@
-import { fetchHotelById, useUpdateHotel } from "@/api-client";
+import { fetchMyHotelById, useUpdateHotel } from "@/api-client";
 import { useAppContext } from "@/contexts/AppContext";
 import ManageHotelForm from "@/forms/manageHotel/ManageHotelForm";
 import { useMutation, useQuery } from "react-query";
@@ -9,9 +9,9 @@ const EditHotel = () => {
   const { showToast } = useAppContext();
 
   const { data: hotel } = useQuery({
-    queryKey: ["fetchHotelById", hotelId],
+    queryKey: ["fetchMyHotelById", hotelId],
     queryFn: async () => {
-      const data = await fetchHotelById(hotelId || "");
+      const data = await fetchMyHotelById(hotelId || "");
 
       return data;
     },

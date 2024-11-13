@@ -4,7 +4,7 @@ import { useGetHotels } from "@/api-client";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
 
-export function Hotels() {
+export function MyHotels() {
   const { data: hotelData } = useQuery("fetchMyHotels", useGetHotels, {
     onError: () => {},
   });
@@ -69,4 +69,4 @@ export function Hotels() {
   );
 }
 
-export default Hotels;
+export default MyHotels;
