@@ -3,6 +3,23 @@ import { validationResult } from "express-validator";
 import User from "../models/user";
 import jwt from "jsonwebtoken";
 
+export const getUser = async (req: Request, res: Response) => {
+  try {
+    const userId = req.userId;
+
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+};
+
 export const register = async (req: Request, res: Response): Promise<any> => {
   const errors = validationResult(req);
 

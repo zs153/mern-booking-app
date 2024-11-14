@@ -37,10 +37,10 @@ export const SearchContextProvider = ({
       new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
   );
   const [adultCount, setAdultCount] = useState<number>(() =>
-    parseInt(sessionStorage.getItem("adultCount") || "1")
+    parseInt(sessionStorage.getItem("adultCount") || "2")
   );
   const [childCount, setChildCount] = useState<number>(() =>
-    parseInt(sessionStorage.getItem("childCount") || "1")
+    parseInt(sessionStorage.getItem("childCount") || "0")
   );
   const [hotelId, setHotelId] = useState<string>(
     () => sessionStorage.getItem("hotelID") || ""

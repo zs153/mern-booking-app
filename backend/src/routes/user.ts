@@ -1,9 +1,11 @@
-import express, { Request, Response } from "express";
-import { check, validationResult } from "express-validator";
-import { register } from "../controllers/user";
+import express from "express";
+import { check } from "express-validator";
+import { getUser, register } from "../controllers/user";
+import verifyToken from "../../middleware/auth";
 
 const router = express.Router();
 
+router.get("/me", verifyToken, getUser);
 router.post(
   "/register",
   [
