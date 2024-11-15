@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { es } from "react-datepicker/node_modules/date-fns/locale/es.mjs";
+import { es } from "date-fns/locale/es";
 registerLocale("es", es);
 
 type Props = {
